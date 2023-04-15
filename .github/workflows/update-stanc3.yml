@@ -14,19 +14,10 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Check for upstream changes
-        id: check_upstream
-        run: |
-          cd stanc3
-          git fetch
-          echo "new_commits=$(git rev-list HEAD...origin/master --count)" >> $GITHUB_OUTPUT
-
       - name: Update if changed
-        if: ${{ steps.check_upstream.outputs.new_commits }} != 0
         run: cd stanc3 && git pull
 
       - name: Commit any updates
-        if: ${{ steps.check_upstream.outputs.new_commits }} != 0
         uses: EndBug/add-and-commit@v9
         with:
           add: 'stanc3'
