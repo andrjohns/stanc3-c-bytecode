@@ -1,0 +1,32 @@
+name: Update Stanc3 submodule
+
+on:
+  schedule:
+    - cron: '0 0 * * *' // At the end of every day
+
+jobs:
+  package-stanc-source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Check for upstream changes
+        id: check_upstream
+        run: |
+          cd stac3
+          git fetch
+          $new_commits = git rev-list HEAD...origin/master --count
+          echo "New commits: [$new_commits]"
+          echo "new_commits=$new_commits" >> $GITHUB_OUTPUT
+
+      - name: Update if changed
+        if: ${{ steps.check_upstream.outputs.new_commits }} != 0
+        run: cd stanc3 && git pull
+
+      - name: Commit any updates
+        if: ${{ steps.check_upstream.outputs.new_commits }} != 0
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'stanc3'
