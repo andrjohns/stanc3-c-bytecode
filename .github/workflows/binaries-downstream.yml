@@ -3,6 +3,7 @@ name: CmdStan Downstream Tests with Binaries
 on:
   push:
     branches: main
+    paths-ignore: '.github/workflows/update-stanc3.yml'
 
 jobs:
   package-stanc-source:
