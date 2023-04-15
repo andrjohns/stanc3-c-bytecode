@@ -10,12 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
           submodules: recursive
-      - name: Set git identity
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
 
       - name: Setup OCaml 4.12.0
         uses: ocaml/setup-ocaml@v2
