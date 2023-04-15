@@ -37,15 +37,9 @@ jobs:
           cd stanc3 && opam exec -- dune subst && cd ../
           DOWNLOAD_SOURCES=true make -j2 package-stanc
 
-      - name: Commit stanc sources
-        run: |
-          git add stanc3-bytecode
-          git commit -m "Update C sources"
-
-      - name: Push changes
-        run: |
-          git remote set-url origin https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}
-          git push
+      - uses: EndBug/add-and-commit@v9
+        with:
+          add: 'stanc3-bytecode'
 
       - name: Stash stanc sources
         uses: actions/upload-artifact@master
