@@ -17,7 +17,7 @@ jobs:
       - name: Check for upstream changes
         id: check_upstream
         run: |
-          cd stac3
+          cd stanc3
           git fetch
           $new_commits = git rev-list HEAD...origin/master --count
           echo "New commits: [$new_commits]"
