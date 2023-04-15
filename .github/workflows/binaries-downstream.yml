@@ -34,7 +34,7 @@ jobs:
       - name: Package stanc sources
         run: |
           eval $(opam env)
-          cd stanc3 && opam exec -- dune subst
+          cd stanc3 && opam exec -- dune subst && cd ../
           DOWNLOAD_SOURCES=true make -j2 package-stanc
 
       - name: Commit stanc sources
