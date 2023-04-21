@@ -15,7 +15,7 @@ jobs:
           submodules: recursive
 
       - name: Update if changed
-        run: cd stanc3 && git pull
+        run: cd stanc3 && git config pull.ff only && git pull
 
       - name: Commit any updates
         uses: EndBug/add-and-commit@v9
