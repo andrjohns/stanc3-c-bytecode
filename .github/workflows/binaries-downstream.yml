@@ -113,5 +113,5 @@ jobs:
 
       - name: Compile 'good' test models
         run: |
-          stan_files=($(find stanc3/test/integration/good/* -name "*.stan"))
+          stan_files=($(find stanc3/test/integration/good/*/* -name "*.stan"))
           make -j2 ${stan_files%%.*}
