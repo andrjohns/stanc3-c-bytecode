@@ -18,6 +18,8 @@ jobs:
         run: cd stanc3 && git checkout master && git pull
 
       - name: Commit any updates
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_PAT }}
         uses: EndBug/add-and-commit@v9
         with:
           add: 'stanc3'

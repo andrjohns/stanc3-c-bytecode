@@ -105,7 +105,13 @@ jobs:
           cp stanc3-bytecode/${{ matrix.config.stanc }} bin/${{ matrix.config.stanc }}
         shell: bash
 
-      - name: Run CmdStan tests
+      - name: Checkout Stanc3
+        uses: actions/checkout@v3
+        with:
+          repository: stan-dev/stanc3
+          path: stanc3
+
+      - name: Compile 'good' test models
         run: |
-          python ./runCmdStanTests.py -j2 src/test/interface
-        shell: bash
+          stan_files=($(find stanc3/test/integration/good/* -name "*.stan"))
+          make -j2 ${stan_files%%.*}
