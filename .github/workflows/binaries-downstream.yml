@@ -3,6 +3,8 @@ name: CmdStan Downstream Tests with Binaries
 on:
   push:
     branches: main
+  schedule:
+    - cron: '0 0 * * 1'
 
 jobs:
   package-stanc-source:
